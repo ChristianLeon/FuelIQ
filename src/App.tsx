@@ -150,7 +150,7 @@ export default function App() {
         </h1>
 
         <p className="text-zinc-400 mt-1 text-sm">
-          Control personal de gasolina y rendimiento
+          Control personal de gasolina y rendimiento Mazda 6
         </p>
 
         <p className="text-zinc-500 mb-5 text-sm">Vehículo: Mazda 6</p>
