@@ -1,23 +1,33 @@
-VitePWA({
-  registerType: "autoUpdate",
-  manifest: {
-    name: "FuelIQ",
-    short_name: "FuelIQ",
-    theme_color: "#000000",
-    background_color: "#000000",
-    display: "standalone",
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
 
-    icons: [
-      {
-        src: "fueliq-192.png",
-        sizes: "192x192",
-        type: "image/png",
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "FuelIQ",
+        short_name: "FuelIQ",
+        description: "Control personal de gasolina y rendimiento",
+        theme_color: "#f97316",
+        background_color: "#09090b",
+        display: "standalone",
+        start_url: "/",
+        icons: [
+          {
+            src: "/fueliq-192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/fueliq-512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       },
-      {
-        src: "fueliq-512.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-    ],
-  },
+    }),
+  ],
 });
