@@ -1,3 +1,14 @@
+function toNumber(value: any): number {
+  if (value === null || value === undefined) return 0;
+
+  return Number(
+    String(value)
+      .replace(/,/g, "")
+      .replace(/\s/g, "")
+      .trim()
+  );
+}
+
 export default function calculateMetrics(currentLog: any, previousLog: any) {
   if (!previousLog) {
     return {
@@ -7,9 +18,14 @@ export default function calculateMetrics(currentLog: any, previousLog: any) {
     };
   }
 
-  const distance = Number(currentLog.odometer) - Number(previousLog.odometer);
+  const currentOdometer = toNumber(currentLog.odometer);
+  const previousOdometer = toNumber(previousLog.odometer);
+  const liters = toNumber(currentLog.liters);
+  const amount = toNumber(currentLog.amount);
 
-  if (distance <= 0) {
+  const distance = currentOdometer - previousOdometer;
+
+  if (distance <= 0 || liters <= 0 || amount <= 0) {
     return {
       distance: 0,
       kmPerLiter: 0,
@@ -19,7 +35,7 @@ export default function calculateMetrics(currentLog: any, previousLog: any) {
 
   return {
     distance,
-    kmPerLiter: Number(distance / Number(currentLog.liters)).toFixed(2),
-    costPerKm: Number(currentLog.amount / distance).toFixed(2),
+    kmPerLiter: Number(distance / liters).toFixed(2),
+    costPerKm: Number(amount / distance).toFixed(2),
   };
 }
